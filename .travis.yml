@@ -5,7 +5,7 @@ rvm:
 before_install:
   - sudo apt-get install cmake zlib1g-dev libbz2-dev
   - wget https://github.com/FlowBox/libflowbox/tarball/master -O libflowbox.tar.gz && tar xfz libflowbox.tar.gz 
-  - cd FlowBox* && mkdir lib && cd lib && cmake -G"Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug ../ && make && sudo make install
+  - cd FlowBox* && mkdir lib && cd lib && cmake -G"Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug ../ && make && sudo make install && sudo ldconfig
 
 branches:
   only:
