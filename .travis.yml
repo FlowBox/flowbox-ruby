@@ -1,0 +1,29 @@
+language: ruby
+rvm:
+  - 1.9.2
+  - 1.9.3
+before_install:
+  - sudo apt-get install cmake zlib1g-dev libbz2-dev
+  - wget https://github.com/FlowBox/libflowbox/tarball/master -O libflowbox.tar.gz && tar -xfvz libflowbox.tar.gz 
+  - cd FlowBox* && mkdir lib && cd lib && cmake -G"Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug ../ && make && sudo make install
+
+branches:
+  only:
+    - master
+    - /^release\/.*$/
+    - develop
+    - /^hotfix\/.*$/
+    - /^feature\/.*$/
+
+notifications:
+  irc:
+    channels:
+      - "irc.freenode.org#flowbox"
+    template:
+      - "%{repository} (%{commit}) : %{message} %{build_number} "
+      - "Build details: %{build_url}"
+    on_success: always
+    on_failure: always
+  email:
+    on_success: change
+    on_failure: always
